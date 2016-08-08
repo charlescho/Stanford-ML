@@ -1,0 +1,54 @@
+function p = predict(Theta1, Theta2, X)
+%PREDICT Predict the label of an input given a trained neural network
+%   p = PREDICT(Theta1, Theta2, X) outputs the predicted label of X given the
+%   trained weights of a neural network (Theta1, Theta2)
+
+% Useful values
+m = size(X, 1);
+num_labels = size(Theta2, 1);
+
+% You need to return the following variables correctly 
+p = zeros(size(X, 1), 1);
+
+% ====================== YOUR CODE HERE ======================
+% Instructions: Complete the following code to make predictions using
+%               your learned neural network. You should set p to a 
+%               vector containing labels between 1 to num_labels.
+%
+% Hint: The max function might come in useful. In particular, the max
+%       function can also return the index of the max element, for more
+%       information see 'help max'. If your examples are in rows, then, you
+%       can use max(A, [], 2) to obtain the max for each row.
+%
+
+
+
+
+
+
+
+
+
+% =========================================================================
+
+%add bias to input layer
+X = [ones(m, 1) X];
+
+%calculate hidden layer
+hidden_layer_p = zeros(m, size(Theta1, 1));
+for c=1:size(Theta1, 1)
+    hidden_layer_p(:, c) = sigmoid(X*Theta1(c, :)');
+end
+
+%add bias to hidden layer
+hidden_layer_p = [ones(m, 1), hidden_layer_p];
+
+output_p = zeros(m, num_labels);
+for c=1:num_labels
+    output_p(:, c) = sigmoid(hidden_layer_p*Theta2(c, :)');
+end
+
+[m i] = max(output_p, [], 2);
+p = i;
+
+end
