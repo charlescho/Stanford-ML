@@ -21,7 +21,9 @@ S = zeros(n);
 %
 
 
-
+% compute covariance matrix
+cov = (X'*X)/m;
+[U S V] = svd(cov);
 
 
 
